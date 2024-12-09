@@ -3,7 +3,7 @@ package com.app.barbershopback.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class Barber {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,10 +12,10 @@ public class Barber {
     private String name;
 
     // No-args constructor
-    public Barber() {}
+    public Client() {}
 
     // All-args constructor
-    public Barber(Long id, String name) {
+    public Client(Long id, String name) {
         this.id = id;
         this.name = name;
     }
