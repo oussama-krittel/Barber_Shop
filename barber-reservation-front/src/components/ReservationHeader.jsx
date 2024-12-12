@@ -69,6 +69,7 @@ const Header = ({ selectedDate, setSelectedDate }) => {
                 mode="single"
                 selected={selectedDate}
                 onSelect={(date) => {
+                  date.setHours(12);
                   setSelectedDate(date || new Date());
                   setShowCalendar(false);
                 }}
