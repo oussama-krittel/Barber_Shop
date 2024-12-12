@@ -30,7 +30,9 @@ public class JwtService {
     ) {
         // Add user-specific claims (if UserDetails is extended to include more fields)
         if (userDetails instanceof com.app.barbershopback.security.user.User user) {
+            extractClaim.put("id", user.getId());
             extractClaim.put("lastname", user.getLastname());
+            extractClaim.put("firstname", user.getFirstname());
             extractClaim.put("email", user.getEmail());
             extractClaim.put("Role", user.getRole());
         }
@@ -40,7 +42,7 @@ public class JwtService {
                 .setClaims(extractClaim)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // Token valid for 1 hour
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
