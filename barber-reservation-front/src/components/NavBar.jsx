@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { FaHome, FaBook } from "react-icons/fa";
+import { MdPhone } from "react-icons/md";
+import { getCurrentUser } from "./../services/user";
+
 import LogoSection from "./LogoSection";
 import SidebarItem from "./SidebarItem";
 import UserComponent from "./UserComponent";
-import { FaHome, FaBook } from "react-icons/fa";
-import { MdPhone } from "react-icons/md"; // Importing the new icon
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
@@ -42,13 +44,7 @@ function NavBar() {
         </ul>
 
         {/* User Section */}
-        <UserComponent
-          user={{
-            name: "Jane Doe",
-            email: "janedoe@example.com",
-          }}
-          expanded={expanded}
-        />
+        <UserComponent user={getCurrentUser()} expanded={expanded} />
       </nav>
     </aside>
   );
