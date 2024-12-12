@@ -1,13 +1,17 @@
 import { FaUser } from "react-icons/fa";
 import { LogOut } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 function UserComponent({ user, expanded }) {
+  const { setIsLoggedIn } = useContext(AuthContext);
+
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure?");
     if (confirmLogout) {
-      console.log("Yes");
+      localStorage.removeItem("token");
+      setIsLoggedIn(false);
     } else {
-      console.log("No");
     }
   };
 
@@ -20,9 +24,11 @@ function UserComponent({ user, expanded }) {
         }`}
       >
         <div className="leading-4">
-          <h4 className="font-semibold">{user?.name || "John Doe"}</h4>
+          <h4 className="font-semibold">
+            {user?.lastname + " " + user?.firstname || "full name"}
+          </h4>
           <span className="text-xs text-gray-600">
-            {user?.email || "johndoe@gmail.com"}
+            {user?.email || "example@gmail.com"}
           </span>
         </div>
         <button

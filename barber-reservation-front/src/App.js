@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthContext, AuthProvider } from "./context/AuthContext";
 import HomeScreen from "./pages/HomeScreen";
 import ReservationScreen from "./pages/ReservationScreen";
-import LoginView from "./pages/LoginScreen";
 import ContactScreen from "./pages/ContactScreen";
+import LoginView from "./pages/LoginScreen";
 
 function App() {
-  return (
+  const { isLoggedIn } = useContext(AuthContext);
+
+  return isLoggedIn ? (
     <Router>
       <Routes>
         <Route path="/" element={<HomeScreen />} />
@@ -14,7 +17,15 @@ function App() {
         <Route path="/contact" element={<ContactScreen />} />
       </Routes>
     </Router>
+  ) : (
+    <LoginView />
   );
 }
 
-export default App;
+export default function AppWithProvider() {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+}

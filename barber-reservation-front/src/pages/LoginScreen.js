@@ -1,4 +1,4 @@
-import React  , {useState} from "react";
+import React, { useState } from "react";
 
 import LoginFormComponent from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm.jsx";
@@ -12,7 +12,7 @@ const LoginView = () => {
 
   return (
     <main className="flex h-screen w-screen bg-slate-100">
-      {!isLogin ? (
+      {isLogin ? (
         <LoginFormComponent toggleView={toggleView} />
       ) : (
         <SignUpForm toggleView={toggleView} />
